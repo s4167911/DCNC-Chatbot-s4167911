@@ -1,2 +1,1 @@
-Had to change to work with streamlit,
-This version doesn't have a memory due to error codes.
+Some of the irrelevant files for hosting the chatbot have been removed from the hosting, you can find them in the submitted file 
