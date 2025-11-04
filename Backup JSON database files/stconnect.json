@@ -1,0 +1,38 @@
+[
+    {
+        "info": "Enrolment information",
+        "link": "https://www.rmit.edu.au/students/support-services/student-connect/ask-about-enrolment"
+    },
+    {
+        "info": "Courses or programs",
+        "link": "https://www.rmit.edu.au/students/support-services/student-connect/ask-about-course-program"
+    },
+    {
+        "info": "Fees and finance",
+        "link": "https://www.rmit.edu.au/students/support-services/student-connect/ask-about-fees-and-finance"
+    },
+    {
+        "info": "Results and graduation",
+        "link": "https://www.rmit.edu.au/students/support-services/student-connect/ask-about-exams-results-graduation"
+    },
+    {
+        "info": "Timetables",
+        "link": "https://www.rmit.edu.au/students/support-services/student-connect/ask-about-class-timetables"
+    },
+    {
+        "info": "Appointments",
+        "link": "https://www.rmit.edu.au/students/support-services/student-connect/book-appointment"
+    },
+    {
+        "info": "Wellbeing, support and housing",
+        "link": "https://www.rmit.edu.au/students/support-services/student-connect/ask-about-wellbeing-support-housing"
+    },
+    {
+        "info": "Global learning programs",
+        "link": "https://www.rmit.edu.au/students/support-services/student-connect/ask-about-exchange-programs"
+    },
+    {
+        "info": "Something else?",
+        "link": "https://www.rmit.edu.au/students/support-services/student-connect/other-queries"
+    }
+]
