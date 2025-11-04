@@ -93,9 +93,11 @@ def build_prompt(courses, user_question, faqs, stcon, prompt_mem, structure=None
         course_text = f"- {title} {campus}, {atar_req} Time: ({fulltime_duration}, {parttime_duration}), Fees: {fee_amount}, Next intake: {next_intake} Courses:\n({year_1_courses})\n({year_2_courses})\n({year_3_courses})\n Minors:({minor_courses})\n Links {link}"
         course_list.append(course_text)
     full_course_context = "\n".join(course_list)
+    '''
     #Basic memory of the last question that the user asked
     with open("memory_project.txt", "r") as memory:
         prompt_mem = memory.read()
+    '''
     #Creating prompt to be sent to processed
     prompt = (
         "You are a helpful assistant that supports new and future students by helping them"
@@ -105,10 +107,12 @@ def build_prompt(courses, user_question, faqs, stcon, prompt_mem, structure=None
         + f'If you are unsure of the answer to a question you will reference the student to {full_connect} that best relates to their question'
         + f'Courses available at RMIT currently {full_course_context}\n'
     )
+    '''
     #Saving the users question to memory 
     with open("memory_project.txt", "w") as memory:
         memory.writelines(user_question)
     return prompt
+    '''
 
 # === Helper: Invoke Claude via Bedrock === #
 def invoke_bedrock(prompt_text, max_tokens=640, temperature=0.3, top_p=0.9):
