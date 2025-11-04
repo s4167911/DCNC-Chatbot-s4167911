@@ -41,7 +41,7 @@ def get_credentials(username, password):
 
 
 # === Helper: Build Prompt from JSON + Structure === #
-def build_prompt(courses, user_question, faqs, stcon, prompt_mem): 
+def build_prompt(courses, user_question, faqs, stcon): 
     #Retrieving frequently asked question data
     question = list()
     for questions in faqs:
