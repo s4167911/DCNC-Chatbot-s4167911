@@ -42,22 +42,6 @@ def get_credentials(username, password):
 
 # === Helper: Build Prompt from JSON + Structure === #
 def build_prompt(courses, user_question, faqs, stcon, prompt_mem, structure=None): 
-    #Implemented as proof of concept but too many tokens to use without filtering 
-    '''
-    subject_list = []
-    for subjects in structure:
-        subjectname = subjects.get("course", "Untitled")
-        credits = subjects.get("credits", "N/A")
-        code = subjects.get("code", "Unknown")
-        coordinator = subjects.get("coordinator", "Not provided")
-        phonenumber = subjects.get("phonenumber", "N/A")
-        email = subjects.get("email", "N/A")
-        description = subjects.get("desc", "N/A")
-        subjectlink = subjects.get("link", "N/A")
-        subject_text = f'Subject: {subjectname}, Coordinator info ({coordinator},{email})'
-        subject_list.append(subject_text)
-    full_subject_context = "\n".join(subject_list)
-    '''
     #Retrieving frequently asked question data
     question = list()
     for questions in faqs:
@@ -93,26 +77,15 @@ def build_prompt(courses, user_question, faqs, stcon, prompt_mem, structure=None
         course_text = f"- {title} {campus}, {atar_req} Time: ({fulltime_duration}, {parttime_duration}), Fees: {fee_amount}, Next intake: {next_intake} Courses:\n({year_1_courses})\n({year_2_courses})\n({year_3_courses})\n Minors:({minor_courses})\n Links {link}"
         course_list.append(course_text)
     full_course_context = "\n".join(course_list)
-    '''
-    #Basic memory of the last question that the user asked
-    with open("memory_project.txt", "r") as memory:
-        prompt_mem = memory.read()
-    '''
     #Creating prompt to be sent to processed
     prompt = (
         "You are a helpful assistant that supports new and future students by helping them"
         + "Select courses that fit given specifications, compare courses and answer frequently asked questions"
         + f'Frequently asked questions {full_faqs}'
-        + "\n\nUser:\n" + user_question + f"if their current question is related to their previous {prompt_mem} try to continue conversation"
+        + "\n\nUser:\n" + user_question
         + f'If you are unsure of the answer to a question you will reference the student to {full_connect} that best relates to their question'
         + f'Courses available at RMIT currently {full_course_context}\n'
     )
-    '''
-    #Saving the users question to memory 
-    with open("memory_project.txt", "w") as memory:
-        memory.writelines(user_question)
-    return prompt
-    '''
 
 # === Helper: Invoke Claude via Bedrock === #
 def invoke_bedrock(prompt_text, max_tokens=640, temperature=0.3, top_p=0.9):
