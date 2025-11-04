@@ -41,13 +41,7 @@ def get_credentials(username, password):
 
 
 # === Helper: Build Prompt from JSON + Structure === #
-def build_prompt(): 
-    with open('allcourses.json', 'r', errors='ignore') as allc:
-        courses = json.load(allc)
-    with open('faqs.json', 'r', errors='ignore') as faqs_text:
-        faqs = json.load(faqs_text)
-    with open('stconnect.json', 'r', errors='ignore') as stcon_text:
-        stcon = json.load(stcon_text)
+def build_prompt(courses, user_question, faqs, stcon): 
     #Retrieving frequently asked question data
     question = list()
     for questions in faqs:
@@ -88,10 +82,11 @@ def build_prompt():
         "You are a helpful assistant that supports new and future students by helping them"
         + "Select courses that fit given specifications, compare courses and answer frequently asked questions"
         + f'Frequently asked questions {full_faqs}'
-        + f'\n\nUser:\n  {user_question}'
+        + "\n\nUser:\n" + user_question
         + f'If you are unsure of the answer to a question you will reference the student to {full_connect} that best relates to their question'
         + f'Courses available at RMIT currently {full_course_context}\n'
     )
+    return prompt
 
 # === Helper: Invoke Claude via Bedrock === #
 def invoke_bedrock(prompt_text, max_tokens=640, temperature=0.3, top_p=0.9):
@@ -140,7 +135,13 @@ if st.button("\U0001F4A1 Get Advice"):
         st.warning("Please enter a question.")
     else:
         try:
-            prompt = build_prompt()
+            with open(f'{Base}/allcourses.json', 'r', errors='ignore') as allc:
+                courses = json.load(allc)
+            with open(f'{Base}/faqs.json', 'r', errors='ignore') as faqs_text:
+                faqs = json.load(faqs_text)
+            with open(f'{Base}/stconnect.json', 'r', errors='ignore') as stcon_text:
+                stcon = json.load(stcon_text)
+            prompt = build_prompt(courses, user_question, faqs, stcon)
 
             with st.spinner("\U0001F50D Generating advice..."):
                 answer = invoke_bedrock(prompt)
