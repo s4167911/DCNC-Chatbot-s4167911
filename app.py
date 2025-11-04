@@ -84,6 +84,9 @@ def build_prompt():
         course_list.append(course_text)
     full_course_context = "\n".join(course_list)
     #Creating prompt to be sent to processed
+    print(type(full_faqs))
+    print(type(full_connect))
+    print(type(full_course_context))
     prompt = (
         "You are a helpful assistant that supports new and future students by helping them"
         + "Select courses that fit given specifications, compare courses and answer frequently asked questions"
