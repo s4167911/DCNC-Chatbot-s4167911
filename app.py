@@ -41,7 +41,7 @@ def get_credentials(username, password):
 
 
 # === Helper: Build Prompt from JSON + Structure === #
-def build_prompt(courses, user_question, faqs, stcon, prompt_mem, structure=None): 
+def build_prompt(courses, user_question, faqs, stcon, prompt_mem): 
     #Retrieving frequently asked question data
     question = list()
     for questions in faqs:
@@ -136,13 +136,11 @@ if st.button("\U0001F4A1 Get Advice"):
         try:
             with open(f'{Base}/allcourses.json', 'r', errors='ignore') as allc:
                 courses = json.load(allc)
-            with open(f'{Base}/allsubjects.json', 'r', errors='ignore') as alls:
-                structure = json.load(alls)
             with open(f'{Base}/faqs.json', 'r', errors='ignore') as faqs_text:
                 faqs = json.load(faqs_text)
             with open(f'{Base}/stconnect.json', 'r', errors='ignore') as stcon_text:
                 stcon = json.load(stcon_text)
-            prompt = build_prompt(courses, user_question, faqs, stcon, structure)
+            prompt = build_prompt(courses, user_question, faqs, stcon)
 
             with st.spinner("\U0001F50D Generating advice..."):
                 answer = invoke_bedrock(prompt)
